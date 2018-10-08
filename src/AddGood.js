@@ -52,6 +52,7 @@ class Good extends React.Component {
 
     this.props.onAddNewGood(newGood);
     this.goodName.current.value = "";
+    this.dateCreation.current.value = "";
   };
 
   render() {
@@ -59,6 +60,8 @@ class Good extends React.Component {
       <React.Fragment>
         <form onSubmit={this.onAddNewGood}>
           <p> Good </p>
+
+          <p>Good name:</p>
           <input
             type="text"
             name="goodName"
@@ -66,6 +69,7 @@ class Good extends React.Component {
             className="input"
             required
           />
+          <p>Good date creation:</p>
           <input
             type="date"
             name="dateCreation"
