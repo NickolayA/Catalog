@@ -6,12 +6,20 @@ import ShowCase from "./ShowCase";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { categories: {}, goods: [] };
+    this.state = {
+      categories: {},
+      goods: []
+    };
   }
   onAddNewCategory = newCategory => {
     this.setState(prevState => {
-      const newState = { ...prevState.categories, ...newCategory };
-      return { categories: newState };
+      const newState = {
+        ...prevState.categories,
+        ...newCategory
+      };
+      return {
+        categories: newState
+      };
     });
   };
 
@@ -19,19 +27,29 @@ class App extends Component {
     this.setState(prevState => {
       const goods = prevState.goods;
       goods.push(newGood);
-      return { goods };
+      return {
+        goods
+      };
     });
   };
 
   render() {
     return (
       <div className="App">
-        <CategoryCreation onAddNewCategory={this.onAddNewCategory} />
-        <AddGood
-          onAddNewGood={this.onAddNewGood}
-          categories={this.state.categories}
-        />
-        <ShowCase goods={this.state.goods} />
+        <div className="columns">
+          <div className="column">
+            <CategoryCreation onAddNewCategory={this.onAddNewCategory} />{" "}
+          </div>
+          <div className="column">
+            <AddGood
+              onAddNewGood={this.onAddNewGood}
+              categories={this.state.categories}
+            />
+          </div>
+          <div className="column">
+            <ShowCase goods={this.state.goods} />{" "}
+          </div>
+        </div>
       </div>
     );
   }

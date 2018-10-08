@@ -39,13 +39,15 @@ class Good extends React.Component {
       dateCreation: this.dateCreation.current.valueAsDate
         .toISOString()
         .substr(0, 10),
-      [this.categorySelect.current.value]: {}
+      category: {}
     };
 
-    for (let i in this.refs) {
-      newGood[this.categorySelect.current.value][this.refs[i].name] = this.refs[
-        i
-      ].value;
+    //console.log(e.refs, this.refs);
+    newGood["category"][this.categorySelect.current.value] = {};
+    for (let ref in this.refs) {
+      newGood["category"][this.categorySelect.current.value][
+        this.refs[ref].name
+      ] = this.refs[ref].value;
     }
 
     this.props.onAddNewGood(newGood);
@@ -57,31 +59,38 @@ class Good extends React.Component {
       <React.Fragment>
         <form onSubmit={this.onAddNewGood}>
           <p> Good </p>{" "}
-          <input type="text" name="goodName" ref={this.goodName} required />
+          <input
+            type="text"
+            name="goodName"
+            ref={this.goodName}
+            className="input"
+            required
+          />
           <input
             type="date"
             name="dateCreation"
             ref={this.dateCreation}
+            className="input"
             required
           />
-          <hr />
+          <hr />{" "}
           {Object.keys(this.props.categories).length ? (
             <React.Fragment>
-              <p> Categories </p>{" "}
-              <select
-                ref={this.categorySelect}
-                onChange={this.onSelectCategoryChange}
-              >
-                {" "}
-                {Object.keys(this.props.categories).map(key => {
-                  return (
-                    <option value={key} key={key}>
-                      {" "}
-                      {key}{" "}
-                    </option>
-                  );
-                })}{" "}
-              </select>{" "}
+              <p> Categories </p>
+              <div className="select">
+                <select
+                  ref={this.categorySelect}
+                  onChange={this.onSelectCategoryChange}
+                >
+                  {Object.keys(this.props.categories).map(key => {
+                    return (
+                      <option value={key} key={key}>
+                        {key}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
             </React.Fragment>
           ) : null}{" "}
           {this.state.selectedCategory ? (
@@ -91,6 +100,7 @@ class Good extends React.Component {
                 .length ? (
                 <React.Fragment>
                   {" "}
+                  <p>Attributes: </p>
                   {Object.keys(
                     this.props.categories[this.state.selectedCategory]
                   ).map(key => {
@@ -100,15 +110,17 @@ class Good extends React.Component {
                         {this.props.categories[this.state.selectedCategory][key]
                           .length ? (
                           <React.Fragment>
-                            <p> Attribute: {key} </p>{" "}
-                            <select ref={key} name={key}>
-                              {" "}
-                              {this.props.categories[
-                                this.state.selectedCategory
-                              ][key].map(val => {
-                                return <option value={val}> {val} </option>;
-                              })}{" "}
-                            </select>{" "}
+                            <p>{key}:</p>
+                            <div className="select">
+                              <select ref={key} name={key}>
+                                {" "}
+                                {this.props.categories[
+                                  this.state.selectedCategory
+                                ][key].map(val => {
+                                  return <option value={val}> {val} </option>;
+                                })}{" "}
+                              </select>{" "}
+                            </div>
                           </React.Fragment>
                         ) : null}{" "}
                       </React.Fragment>
@@ -119,7 +131,7 @@ class Good extends React.Component {
             </React.Fragment>
           ) : null}{" "}
           <hr />
-          <button> Add new good </button>{" "}
+          <button className="button"> Add new good </button>{" "}
         </form>{" "}
       </React.Fragment>
     );

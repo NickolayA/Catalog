@@ -2,40 +2,62 @@ import React from "react";
 
 const ShowCase = props => {
   return (
-    <div>
+    <aside className="menu">
       <React.Fragment>
         {props.goods.length ? (
           <div>
+            <p className="menu-label">Goods</p>
             {props.goods.map((good, index) => {
               const categoryName = Object.keys(good.category)[0];
 
               const attributes = [];
               for (let key in good.category[categoryName]) {
                 attributes.push(
-                  <p>
-                    {key}: {good.category[categoryName][key]}
-                  </p>
+                  <li>
+                    <a>
+                      {key}: {good.category[categoryName][key]}
+                    </a>
+                  </li>
                 );
               }
 
-              const categoryNameContainer = <h2>Category: {categoryName}</h2>,
-                goodName = <h1>Good name: {good.goodName}</h1>,
-                dateCreation = <p>Creation date: {good.dateCreation}</p>;
+              const categoryNameContainer = (
+                  <li>
+                    <a>Category: {categoryName}</a>
+                  </li>
+                ),
+                goodName = (
+                  <li>
+                    <a>Good name: {good.goodName}</a>
+                  </li>
+                ),
+                dateCreation = (
+                  <li>
+                    <a>Creation date: {good.dateCreation}</a>
+                  </li>
+                );
 
               return (
                 <React.Fragment>
-                  {categoryNameContainer}
-                  {goodName}
-                  {dateCreation}
-                  Attributes:
-                  {attributes}
+                  <ul className="menu-list">
+                    {categoryNameContainer}
+                    {goodName}
+                    {dateCreation}
+                    <li>Attributes:</li>
+                    <li>
+                      <ul>{attributes}</ul>
+                    </li>
+                  </ul>
+                  <hr />
                 </React.Fragment>
               );
             })}
           </div>
-        ) : null}
+        ) : (
+          <p className="menu-label">Goods not exist</p>
+        )}
       </React.Fragment>
-    </div>
+    </aside>
   );
 };
 
