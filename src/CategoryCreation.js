@@ -68,6 +68,7 @@ class CategoryCreation extends React.Component {
       const attributeValues = this.state.category[
         this.selectMenu.current.value
       ];
+
       attributeValues.push(this.newAttributeValue.current.value);
       this.setState({
         [this.selectMenu.current.value]: attributeValues
@@ -83,18 +84,17 @@ class CategoryCreation extends React.Component {
     return (
       <React.Fragment>
         <div className="categoryComponent">
-          <p> Category </p>{" "}
+          <p> Category </p>
           <input
             type="text"
             name="categoryName"
             placeholder="New category name"
             ref={this.categoryName}
             className="input"
-          />{" "}
+          />
           <button className="button" onClick={this.onAddNewCategory}>
-            {" "}
-            Create new category{" "}
-          </button>{" "}
+            Create new category
+          </button>
           <hr />
           <input
             type="text"
@@ -102,21 +102,23 @@ class CategoryCreation extends React.Component {
             placeholder="New attribute name"
             ref={this.attributeName}
             className="input"
-          />{" "}
+          />
           <button className="button" onClick={this.onAddNewAttribute}>
-            {" "}
-            Add new attribute{" "}
-          </button>{" "}
-          <hr />{" "}
+            Add new attribute
+          </button>
+          <hr />
           {Object.keys(this.state.category).length ? (
             <React.Fragment>
               <div className="select">
                 <select ref={this.selectMenu}>
-                  {" "}
                   {Object.keys(this.state.category).map(key => {
-                    return <option value={key}> {key} </option>;
-                  })}{" "}
-                </select>{" "}
+                    return (
+                      <option key={key + "categoryCreation"} value={key}>
+                        {key}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
               <input
                 type="text"
@@ -124,14 +126,14 @@ class CategoryCreation extends React.Component {
                 placeholder="New attribute value"
                 ref={this.newAttributeValue}
                 className="input"
-              />{" "}
+              />
               <button className="button" onClick={this.onAddNewAttributeValue}>
-                Add new attribute value{" "}
-              </button>{" "}
+                Add new attribute value
+              </button>
               <hr />
             </React.Fragment>
-          ) : null}{" "}
-        </div>{" "}
+          ) : null}
+        </div>
       </React.Fragment>
     );
   }

@@ -58,7 +58,7 @@ class Good extends React.Component {
     return (
       <React.Fragment>
         <form onSubmit={this.onAddNewGood}>
-          <p> Good </p>{" "}
+          <p> Good </p>
           <input
             type="text"
             name="goodName"
@@ -73,7 +73,7 @@ class Good extends React.Component {
             className="input"
             required
           />
-          <hr />{" "}
+          <hr />
           {Object.keys(this.props.categories).length ? (
             <React.Fragment>
               <p> Categories </p>
@@ -84,7 +84,7 @@ class Good extends React.Component {
                 >
                   {Object.keys(this.props.categories).map(key => {
                     return (
-                      <option value={key} key={key}>
+                      <option key={key + "categories"} value={key}>
                         {key}
                       </option>
                     );
@@ -92,47 +92,47 @@ class Good extends React.Component {
                 </select>
               </div>
             </React.Fragment>
-          ) : null}{" "}
+          ) : null}
           {this.state.selectedCategory ? (
             <React.Fragment>
-              {" "}
               {Object.keys(this.props.categories[this.state.selectedCategory])
                 .length ? (
                 <React.Fragment>
-                  {" "}
-                  <p>Attributes: </p>
+                  <p> Attributes: </p>
                   {Object.keys(
                     this.props.categories[this.state.selectedCategory]
                   ).map(key => {
                     return (
-                      <React.Fragment>
-                        {" "}
+                      <React.Fragment key={key + "attribute"}>
+                        <p>{key}</p>
                         {this.props.categories[this.state.selectedCategory][key]
                           .length ? (
                           <React.Fragment>
-                            <p>{key}:</p>
                             <div className="select">
                               <select ref={key} name={key}>
-                                {" "}
                                 {this.props.categories[
                                   this.state.selectedCategory
                                 ][key].map(val => {
-                                  return <option value={val}> {val} </option>;
-                                })}{" "}
-                              </select>{" "}
+                                  return (
+                                    <option key={val + key} value={val}>
+                                      {val}
+                                    </option>
+                                  );
+                                })}
+                              </select>
                             </div>
                           </React.Fragment>
-                        ) : null}{" "}
+                        ) : null}
                       </React.Fragment>
                     );
-                  })}{" "}
+                  })}
                 </React.Fragment>
-              ) : null}{" "}
+              ) : null}
             </React.Fragment>
-          ) : null}{" "}
+          ) : null}
           <hr />
-          <button className="button"> Add new good </button>{" "}
-        </form>{" "}
+          <button className="button"> Add new good </button>
+        </form>
       </React.Fragment>
     );
   }

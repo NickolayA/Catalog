@@ -9,11 +9,11 @@ const ShowCase = props => {
             <p className="menu-label">Goods</p>
             {props.goods.map((good, index) => {
               const categoryName = Object.keys(good.category)[0];
-
               const attributes = [];
+
               for (let key in good.category[categoryName]) {
                 attributes.push(
-                  <li>
+                  <li key={key + "category"}>
                     <a>
                       {key}: {good.category[categoryName][key]}
                     </a>
@@ -23,7 +23,10 @@ const ShowCase = props => {
 
               const categoryNameContainer = (
                   <li>
-                    <a>Category: {categoryName}</a>
+                    <a>
+                      <span className="has-text-success">Category:</span>{" "}
+                      {categoryName}
+                    </a>
                   </li>
                 ),
                 goodName = (
@@ -38,7 +41,7 @@ const ShowCase = props => {
                 );
 
               return (
-                <React.Fragment>
+                <React.Fragment key={good.goodName + good.dateCreation}>
                   <ul className="menu-list">
                     {categoryNameContainer}
                     {goodName}

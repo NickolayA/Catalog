@@ -38,7 +38,7 @@ class App extends Component {
       <div className="App">
         <div className="columns">
           <div className="column">
-            <CategoryCreation onAddNewCategory={this.onAddNewCategory} />{" "}
+            <CategoryCreation onAddNewCategory={this.onAddNewCategory} />
           </div>
           <div className="column">
             <AddGood
@@ -47,7 +47,7 @@ class App extends Component {
             />
           </div>
           <div className="column">
-            <ShowCase goods={this.state.goods} />{" "}
+            <ShowCase goods={this.state.goods} />
           </div>
         </div>
       </div>
